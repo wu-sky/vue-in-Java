@@ -1,0 +1,25 @@
+spring:
+  datasource:
+    username: root
+    password: ''
+    #password这个节点如果配置成纯数字。会报Access denied for user 'root'@'localhost', 必须加一个引号
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    type: com.alibaba.druid.pool.DruidDataSource
+    url: jdbc:mysql://localhost:3306/db1902?useUnicode=true&characterEncoding=UTF-8&serverTimezone=UTC
+    #druid 数据源专有配置
+    initialSize: 5
+    minIdle: 5
+    maxActive: 20
+    maxWait: 60000
+    timeBetweenEvictionRunsMillis: 60000
+    minEvictableIdleTimeMillis: 300000
+    validationQuery: SELECT 1 FROM DUAL
+    testWhileIdle: true
+    testOnBorrow: false
+    testOnReturn: false
+    poolPreparedStatements: true
+  devtools:
+    restart:
+     enabled: true
+mybatis:
+  type-aliases-package: com.sky.mapper

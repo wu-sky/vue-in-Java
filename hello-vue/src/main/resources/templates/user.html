@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:v="http://www.w3.org/1999/xhtml" xmlns:v-bind="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+
+    <!-- 新 Bootstrap 核心 CSS 文件 -->
+
+    <link href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- jQuery文件。务必在bootstrap.min.js 之前引入 -->
+
+    <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+
+    <!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
+
+    <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+    <title>user</title>
+</head>
+<body>
+<div class="container" id="app">
+    <table class="table table-hover" id="tab">
+        <thead>
+        <tr>
+            <th>id</th>
+            <th>username</th>
+            <th>name</th>
+            <th>birthday</th>
+            <th>loginFlag</th>
+            <th>roleId</th>
+            <th>filePath</th>
+            <th>createDate</th>
+            <th>sex</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr v-for="obj in userList">
+            <td>{{obj.id}}</td>
+            <td>{{obj.username}}</td>
+            <td>{{obj.name}}</td>
+            <td>{{obj.birthday}}</td>
+            <td>{{obj.loginFlag}}</td>
+            <td>{{obj.roleId}}</td>
+            <td>{{obj.filePath}}</td>
+            <td>{{obj.createDate}}</td>
+            <td>{{obj.sex}}</td>
+
+        </tr>
+
+        </tbody>
+    </table>
+
+</div>
+<script src="./js/vue.min.js"></script>
+<script src="./js/axios.min.js"></script>
+<script>
+    new Vue({
+        el:"#app",
+        data:{
+            user: {
+                id: "",
+                username: "",
+                name: "",
+                birthday: "",
+                loginFlag: "",
+                roleId: "",
+                filePath: "",
+                createDate: "",
+                sex: ""
+            },
+            userList:[]
+
+        },
+        methods:{
+            findAll:function () {
+                var _this=this;
+                axios.get("/getUsers")
+                    .then(function (response) {
+                        _this.userList=response.data;
+                        console.log("response:  "+response);
+                    }).catch(function (reason) {
+                        console.log("reason:  "+reason);
+                })
+            }
+        },
+
+        created:function(){
+            this.findAll();
+        }
+
+
+
+
+    })
+
+
+
+</script>
+</body>
+</html>
